@@ -5,7 +5,7 @@ namespace StarterCode_WayPoints
     internal class Program
     {
         //directory containing file
-        static string FILE_PATH = "..\\..\\..\\"; //set path to solution directory
+        static string FILE_PATH = "C:\\MMU\\Algorithms and data Structures\\WAY_POINT\\"; //set path to solution directory
         static string fileName = "UK_waypoints.csv"; //file to read
 
         static void Main(string[] args)
