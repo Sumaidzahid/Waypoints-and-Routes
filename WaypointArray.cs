@@ -1,6 +1,6 @@
 ﻿namespace StarterCode_WayPoints
 {
-    internal class WaypointArray //class to hold an array of Waypoint objects similar to Stack and Queue classes we have seen before, but with some specific methods to add and display waypoints
+    internal class WaypointArray //class to hold an array of Waypoint objects similar to Stack and Queue classes we have seen before, but with some specific methods to add and display waypoints in the array
     {
         private Waypoint[] waypoints;
         private int numberOfWayPoints = 0;

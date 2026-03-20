@@ -10,7 +10,7 @@ namespace StarterCode_WayPoints
 
         static void Main(string[] args)
         {
-           readDisplayFileWayPoints(FILE_PATH + fileName);
+            readDisplayFileWayPoints(FILE_PATH + fileName);
             //To Do : Add your test code here to show that each criteria you attempted is working
             //2. Display all waypoints in array
             //3. Create a route and display a route
@@ -26,11 +26,11 @@ namespace StarterCode_WayPoints
             foreach (string line in linesInFile) //take each line string from the file one at a time
             {
                 lineNumber++; //increment the current line number
-                                //split up line into separate features split by commas array of strings, each element is a word on the current line
+                              //split up line into separate features split by commas array of strings, each element is a word on the current line
                 if (lineNumber != 1 && line != "") //ignore line 1 (column headers) and any empty lines
                 {
                     string[] featuresInLine = line.Split(','); //csv file, split each line based on ','
-                                                                //11 features, ignore: country,style,rwdir,rwlen,freq
+                                                               //11 features, ignore: country,style,rwdir,rwlen,freq
                     string name = featuresInLine[0];
                     string code = featuresInLine[1];
                     string latitude = featuresInLine[3];
