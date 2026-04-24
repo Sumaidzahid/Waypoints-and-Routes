@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("StarterCode_WayPoints")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0bc64b283fa81477643b5a77b54c3e8729a429fb")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df996bbc4673f8226d08846e0fad6812d6861e36")]
 [assembly: System.Reflection.AssemblyProductAttribute("StarterCode_WayPoints")]
 [assembly: System.Reflection.AssemblyTitleAttribute("StarterCode_WayPoints")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
