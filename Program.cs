@@ -8,6 +8,7 @@ namespace StarterCode_WayPoints
         static string FILE_PATH = "C:\\MMU\\Algorithms and data Structures\\WAY_POINT\\"; //set path to solution directory
         static string fileName = "UK_waypoints.csv"; //file to read
         static WaypointArray waypointarray = new WaypointArray(5000);
+        static RouteArray routearray = new RouteArray(100);
         static void Main(string[] args)
         {
             readDisplayFileWayPoints(FILE_PATH + fileName);
@@ -16,37 +17,124 @@ namespace StarterCode_WayPoints
             //3. Create a route and display a route
             //4. insert a waypoint in a specific place route - display edited route
             //5. remove a waypoint - display edited route
-            do             
+            do
             {
                 Console.WriteLine("\nPlease select an option (1,2,3,4,5,6):\n");
                 Console.WriteLine("1. Display all Waypoints.");
                 Console.WriteLine("2. Total number of Waypoints.");
                 Console.WriteLine("3. Select a Waypoint.");
-                Console.WriteLine("4. Create a Route.");
-                Console.WriteLine("5. Search a Route.");
-                Console.WriteLine("6. Exit\n");
+                Console.WriteLine("4. Create a Waypoint.");
+                Console.WriteLine("5. Create a Route.");
+                Console.WriteLine("6. Add Waypoint at front of the Route.");
+                Console.WriteLine("7. Add Waypoint at end of the Route.");
+                Console.WriteLine("8. Insert Waypoint at specific place in the Route.");
+                Console.WriteLine("9. Remove a Waypoint from the Route.");
+                Console.WriteLine("10. Display a Route.");
+                Console.WriteLine("11. Exit\n");
 
-                int Choice = int.Parse(Console.ReadLine());
+                if (int.TryParse(Console.ReadLine(), out int Choice))
+                {
+                    switch (Choice)
+                    {
+                        case 1: { waypointarray.displayAllWayPoints(); break; }
+                        case 2: { waypointarray.getNumberOfWayPoints(); break; }
+                        case 3: { waypointarray.SearchWaypoint(); break; }
+                        case 4: { waypointarray.addWayPoint(); break; }
+                        case 5:
+                            {
+                                Route addroute = routearray.addRoute();
+                                if (addroute == null) continue;
+                                while (true)
+                                {
+                                    Console.WriteLine("press enter to add another waypoint or type 'done' to finish:\n");
+                                    if (Console.ReadLine().ToLower() == "done") break;
+                                    Waypoint wp = waypointarray.SearchWaypoint();
+                                    if (wp != null)
+                                    {
+                                        addroute.addFrontWayPoint(wp);
+                                    }
+                                }
+                                break;
+                            }
+                        case 6:
+                            {
+                                if (!routearray.displayAllRoutes()) { continue; }
+                                Route addfront = routearray.SearchRoute();
+                                if (addfront == null) continue;
+                                while (true)
+                                {
+                                    Waypoint wp = waypointarray.SearchWaypoint();
+                                    if (wp == null) continue;
+                                    addfront.addFrontWayPoint(wp);
+                                    Console.WriteLine("Waypoint added to front of route. Add another? (y/n)");
+                                    if (Console.ReadLine().ToLower() != "y") break;
+                                }
+                                break;
+                            }
+                        case 7:
+                            {
+                                if (!routearray.displayAllRoutes()) { continue; }
+                                Route addend = routearray.SearchRoute();
+                                if (addend == null) continue;
+                                while (true)
+                                {
+                                    Waypoint wp = waypointarray.SearchWaypoint();
+                                    if (wp == null) continue;
+                                    addend.addEndWayPoint(wp);
+                                    Console.WriteLine("Waypoint added to end of route. Add another? (y/n)");
+                                    if (Console.ReadLine().ToLower() != "y") break;
+                                }
+                                break;
+                            }
+                        case 8:
+                            {
+                                if (!routearray.displayAllRoutes()) { continue; }
+                                Route insert = routearray.SearchRoute();
+                                if (insert == null) continue;
+                                while (true)
+                                {
+                                    Waypoint wp = waypointarray.SearchWaypoint();
+                                    if (wp == null) continue;
+                                    Console.WriteLine("Enter the index to insert the waypoint at:");
+                                    int index = int.Parse(Console.ReadLine());
+                                    insert.InsertSpecific(wp, index);
+                                    Console.WriteLine("Waypoint inserted at index " + index + ". Insert another? (y/n)");
+                                    if (Console.ReadLine().ToLower() != "y") break;
+                                }
+                                break;
+                            }
+                        case 9:
+                            {
+                                if (!routearray.displayAllRoutes()) { continue; }
+                                Route remove = routearray.SearchRoute();
+                                if (remove == null) continue;
+                                while (true)
+                                {
+                                    Console.WriteLine("Enter the name of the waypoint to remove:");
+                                    string name = Console.ReadLine();
+                                    remove.RemoveWayPoint(name);
+                                    remove.displayRoute();
+                                    Console.WriteLine("Waypoint removed. Remove another? (y/n)");
+                                    if (Console.ReadLine().ToLower() != "y") break;
+                                }
+                                break;
+                            }
+                        case 10:
+                            {
+                                if (!routearray.displayAllRoutes()) { continue; }
+                                Route displayroute = routearray.SearchRoute();
+                                if (displayroute != null) displayroute.displayRoute();
+                                break;
+                            }
+                        case 11:
+                            {
+                                Console.WriteLine("Exiting Program...");
+                                return;
+                            }
 
-                if (Choice == 1) { waypointarray.displayAllWayPoints(); }
-                else if (Choice == 2) { waypointarray.getNumberOfWayPoints(); }
-                else if (Choice == 3) { waypointarray.SearchWaypoint(); }
-                else if (Choice == 4)
-                {
-                    Console.WriteLine("Enter Route Name:");
-                    Route route = new Route(Console.ReadLine());
-                    route.addWayPoint(waypointarray.SearchWaypoint());
+                        default: { Console.WriteLine("Invalid Choice"); break; }
+                    }
                 }
-                else if (Choice == 5) { 
-                    Console.WriteLine("Route Name:");
-                    string nameofroute = Console.ReadLine();
-                }
-                else if (Choice == 6)
-                {
-                    Console.WriteLine("Exiting Program...");
-                    break;
-                }
-                else { Console.WriteLine("Invalid Choice"); }
             } while (true);
         }
 
@@ -70,7 +158,7 @@ namespace StarterCode_WayPoints
                     int elevation = convertElevationToMeters(featuresInLine[5]); //some in ft, some in m - convert to meters
                     string description = buildDescription(featuresInLine);
 
-                    waypointarray.addWayPoint(new Waypoint(name, code, latitude, longitude, elevation, description));
+                    waypointarray.getFileWaypoints(new Waypoint(name, code, latitude, longitude, elevation, description));
                 }
             }
         }
