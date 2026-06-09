@@ -20,6 +20,7 @@
             }
             else {Console.WriteLine("Waypoint array is full");} 
         }
+
         // add a waypoint to the array
         public void addWayPoint() 
         { 

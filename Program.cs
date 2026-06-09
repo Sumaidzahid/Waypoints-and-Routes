@@ -14,9 +14,9 @@ namespace StarterCode_WayPoints
             readDisplayFileWayPoints(FILE_PATH + fileName);
             //To Do : Add your test code here to show that each criteria you attempted is working
             //2. Display all waypoints in array (DONE)
-            //3. Create a route and display a route
-            //4. insert a waypoint in a specific place route - display edited route
-            //5. remove a waypoint - display edited route
+            //3. Create a route and display a route (DONE)
+            //4. insert a waypoint in a specific place route - display edited route (DONE)
+            //5. remove a waypoint - display edited route (DONE)
             do
             {
                 Console.WriteLine("\nPlease select an option (1,2,3,4,5,6):\n");
@@ -119,6 +119,7 @@ namespace StarterCode_WayPoints
                                 }
                                 break;
                             }
+
                         case 10:
                             {
                                 if (!routearray.displayAllRoutes()) { continue; }

@@ -1,7 +1,7 @@
 ﻿namespace StarterCode_WayPoints
 {
     //Link
-    class RouteNode
+    internal class RouteNode
     {
         private Waypoint waypoint;
         private RouteNode next;
@@ -10,6 +10,7 @@
             this.waypoint = waypoint;
             this.next = null;
         }
+
         public RouteNode(Waypoint waypoint, RouteNode next)
         {
             this.waypoint = waypoint;
@@ -50,7 +51,6 @@
         {
             get { return noOfWaypoints; }
         }
-        //addFront
         //add a waypoint to the front of the route
         public void addFrontWayPoint(Waypoint waypoint)
         {

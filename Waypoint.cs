@@ -18,6 +18,7 @@
             this.altitude = altitude;
             this.description = description;
         }
+
         // properties for each feature of a waypoint
         public string Name
         {

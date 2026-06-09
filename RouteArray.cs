@@ -29,6 +29,7 @@ namespace StarterCode_WayPoints
             Console.WriteLine("Route not found.");
             return null;
         }
+
         public Route? addRoute()
         {
             if (RouteIndex < routes.Length) // check if array is full
